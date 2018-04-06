@@ -14,7 +14,7 @@ class Sensor(models.Model):
     modulation = models.IntegerField(default=0)
 
 class Signal(models.Model):
-    sample_id = models.IntegerField(default=0)
+    sample_id = models.ForeignKey(sensor_id)
     azimuth = models.FloatField(default=0.0)
     signal_strength = models.IntegerField(default = 0)
     sensor_latitude = models.FloatField(default=0.0)

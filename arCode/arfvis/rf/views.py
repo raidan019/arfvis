@@ -15,12 +15,16 @@ def index(request):
         data = json.loads(request.body.decode('utf-8'))
         print ("Got json: %s" % data)
         newsignal = Signal()
+        newsignal.sample_id = data['sample_id']
+        newsignal.azimuth = data['azimuth']
+        newsignal.signal_strength = data['signal_strength']
+        newsignal.sensor_latitude = data['sensor_latitude']
+        newsignal.sensor_longitude = data['sensor_longitude']
         newsignal.modulation = data['modulation']
+        newsignal.encryption_type = data['encryption_type']
+        newsignal.meter_distance = data['meter_distance']
         newsignal.power = data['power']
-        newsignal.bssid = data['bssid']
-        newsignal.encryption = data['encryption']
-        newsignal.channel = data['channel']
-        newsignal.essid = data['essid']
+        newsignal.date_time = data['date_time']
         if (newsignal.save()):
             response="received"
         else:
