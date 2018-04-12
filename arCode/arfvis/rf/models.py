@@ -14,8 +14,17 @@ class Sensor(models.Model):
     encryption_type = models.IntegerField(default=0)
     modulation = models.IntegerField(default=0)
 
+class Device(models.Model):
+    device_name = models.CharField(max_length=100)
+    pictureFileName = models.CharField(max_length=100)
+    three_dimensional_Object = models.CharField(max_length=100)
+    default_username = models.CharField(max_length=100)
+    default_password = models.CharField(max_length=100)
+    vendor_id = models.CharField(max_length=100)
+
 class Signal(models.Model):
-    sample_id = models.ForeignKey(Sensor, on_delete=models.CASCADE, default=1)
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, default=1)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, default=1)
     azimuth = models.FloatField(default=0.0)
     signal_strength = models.IntegerField(default = 0)
     sensor_latitude = models.FloatField(default=0.0)
@@ -24,6 +33,9 @@ class Signal(models.Model):
     encryption_type = models.IntegerField(default = 0)
     meter_distance = models.IntegerField(default = 0)
     power = models.IntegerField(default = 0)
+    bssid = models.CharField(max_length=100)
+    essid = models.CharField(max_length=100)
+    apmode = models.CharField(max_length=100)
     date_time = models.DateTimeField(default=datetime.now, blank=True) 
 
 class Modulation(models.Model):
@@ -34,4 +46,5 @@ class Encryption(models.Model):
     encryption_id = models.ForeignKey(Signal, on_delete=models.CASCADE, default=1)
     encryption_name = models.CharField(max_length=100)
     key_size = models.IntegerField(default = 0)
+
 
