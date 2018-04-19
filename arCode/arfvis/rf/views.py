@@ -22,17 +22,19 @@ def index(request):
         newsignal.sensor_latitude = data['sensor_latitude']
         newsignal.sensor_longitude = data['sensor_longitude']
         newsignal.modulation = data['modulation']
-        newsignal.encryption_type = data['encryption_type']
+        newsignal.encryption_type = data['encryption']
         newsignal.meter_distance = data['meter_distance']
         newsignal.power = data['power']
         newsignal.bssid = data['bssid']
         newsignal.essid = data['essid']
         newsignal.apmode = data['apmode']
         newsignal.date_time = data['date_time']
+        #ensure var names match
         if (newsignal.save()):
             response="received"
         else:
             response="Oops couldn't save signal"
     else:
         response= "ARFVIS Main"
+        #make a template directory (lists top signals[limit approx. 20])
     return HttpResponse(response)
