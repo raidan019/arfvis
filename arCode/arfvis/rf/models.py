@@ -3,6 +3,13 @@ from datetime import datetime
 
 # Create your models here.
 
+class Modulation(models.Model):
+    modulation_name = models.CharField(max_length=100)
+
+class Encryption(models.Model):
+    encryption_name = models.CharField(max_length=100)
+    key_size = models.IntegerField(default = 0)
+
 class Sensor(models.Model):
     antenna_type = models.IntegerField(default=0)
     antenna_direction = models.IntegerField(default=0)
@@ -37,11 +44,5 @@ class Signal(models.Model):
     apmode = models.CharField(max_length=100)
     date_time = models.DateTimeField(default=datetime.now, blank=True) 
 
-class Modulation(models.Model):
-    modulation_name = models.CharField(max_length=100)
-
-class Encryption(models.Model):
-    encryption_name = models.CharField(max_length=100)
-    key_size = models.IntegerField(default = 0)
 
 
