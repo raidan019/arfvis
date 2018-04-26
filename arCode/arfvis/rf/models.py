@@ -44,5 +44,6 @@ class Signal(models.Model):
     apmode = models.CharField(max_length=100)
     date_time = models.DateTimeField(default=datetime.now, blank=True) 
 
-
+class ImageModel(models.Model):
+    model_pic = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')
 

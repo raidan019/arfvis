@@ -25,13 +25,21 @@ def sendSignals(server, wifitree):
             enctype = 0 #Default if none of the above
             print ("Warning undefined enc: ", encryption)
         signal = {
+            "sensor",
+            "device" ,
+            "azimuth",
+            "signal_strength",
+            "sensor_latitude",
+            "sensor_longitude",
             "modulation" : 0,
+            "encryption" : enctype,
+            "meter_distance",
             "power" : int(ap.signal),
             "bssid" : ap.address.replace(":",""),
-            "encryption" : enctype,
+            "essid" : ap.ssid, 
             "channel" : int(ap.channel),
-            "essid" : ap.ssid,
-            "mode" : ap.mode,
+            "apmode" : ap.mode,
+            "date_time",
         }
 
         request = urllib.request.Request(url='http://' + server + '/rf/', data=json.dumps(signal).encode('utf8'), method='PUT', headers={'content-type':'application=json'})

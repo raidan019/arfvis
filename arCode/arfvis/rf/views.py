@@ -4,7 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Signal
 from .models import Sensor
-
+from django.http import HttpResponseRedirect
+from .forms import UploadFileForm
+from somewhere import handle_uploaded_file
 # Create your views here.
 
 @csrf_exempt #This allows posting from the client
@@ -38,3 +40,22 @@ def index(request):
         response= "ARFVIS Main"
         #make a template directory (lists top signals[limit approx. 20])
     return HttpResponse(response)
+
+
+
+def upload_pic(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = ExampleModel.objects.get(pk=course_id)
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')
+
+
+
+def handle_uploaded_file(f):
+    with open('some/file/sample.jpg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
