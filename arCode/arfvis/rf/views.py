@@ -5,8 +5,8 @@ import json
 from .models import Signal
 from .models import Sensor
 from django.http import HttpResponseRedirect
-from .forms import UploadFileForm
-from somewhere import handle_uploaded_file
+from .forms import ImageUploadForm
+#from somewhere import handle_uploaded_file
 # Create your views here.
 
 @csrf_exempt #This allows posting from the client
@@ -38,12 +38,14 @@ def index(request):
             response="Oops couldn't save signal"
     else:
         response= "ARFVIS Main"
-	signal_list = list(Signal.objects.order_by('signal_strength')[LIMIT:20])
-        #make a template directory (lists top signals[limit approx. 20])
-    return HttpResponse(response)
+    signal_list = list(Signal.objects.order_by('signal_strength')[LIMIT:20])
+    context = {'Signal': signal_list} #fill a context with the signal list
+    template = loader.get_template('rf/templates/rf/index.html') #Get the template we created    
 
+    #make a template directory (lists top signals[limit approx. 20])
+    return HttpResponse(template.render(context, request))
 
-
+    
 def upload_pic(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
@@ -56,7 +58,7 @@ def upload_pic(request):
 
 
 
-def handle_uploaded_file(f):
-    with open('some/file/sample.jpg', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+#def handle_uploaded_file(f):
+#    with open('some/file/sample.jpg', 'wb+') as destination:
+#        for chunk in f.chunks():
+#            destination.write(chunk)
