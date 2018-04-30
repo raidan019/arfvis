@@ -38,6 +38,7 @@ def index(request):
             response="Oops couldn't save signal"
     else:
         response= "ARFVIS Main"
+	signal_list = list(Signal.objects.order_by('signal_strength')[LIMIT:20])
         #make a template directory (lists top signals[limit approx. 20])
     return HttpResponse(response)
 
