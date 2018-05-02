@@ -10,5 +10,6 @@ urlpatterns = [
 '''
 urlpatterns = [
      path('', views.index, name = 'index'),
+     path('hololens', views.hololens, name = 'hololens'),
      path('upload_pic', views.upload_pic, name = 'upload_pic'),
 ]

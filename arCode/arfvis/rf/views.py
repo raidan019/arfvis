@@ -56,7 +56,10 @@ def upload_pic(request):
             return HttpResponse('image upload success')
     return HttpResponseForbidden('allowed only via POST')
 
-
+def hololens(request):
+     signal_list = list(Signal.objects.order_by('signal_strength')[LIMIT:20])
+    context = {'Signal': signal_list} #fill a context with the signal list
+    template = loader.get_template('rf/templates/rf/hololens.html') #Get the
 
 #def handle_uploaded_file(f):
 #    with open('some/file/sample.jpg', 'wb+') as destination:
