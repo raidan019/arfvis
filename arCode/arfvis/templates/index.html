@@ -1,0 +1,15 @@
+{% extends 'client/base_generic.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<p>Welcome, {{ user.get_username }}.
+{% else %}
+login
+{% endif %}
+
+<h2> Signal Directory </h2>
+
+{% if signal %} <!-- check if list is full or empty -->
+<ul>
+
+
+
