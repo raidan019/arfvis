@@ -1,12 +1,37 @@
-<h1>{{ cadet.name }}</h1>
+<h1>{{ signal.sensor }}</h1>
 
 
 
 <ul>
 
-   <li>Xnumber: {{ cadet.xnumber }}</li>
+    <li>Azimuth: {{ signal.azimuth }} </li>
 
-   <li>Company: {{ cadet.company.shortname}}-{{ cadet.company.regiment}}</li>
+	<li>Distance (meters): {{ signal.meter_distance }} </li>
+
+    <li>X Coordinates: {{ signal.sensor_latitude }}, Y Coodinates: {{signal.sensor_longitude}} </li>
+
+    <li>Signal Strength: {{ signal.signal_strength }} </li>
+
+	<li>Date/Time: {{ signal.date_time }} </li>
+	
+	<li>Sensor: {{ signal.sensor }} </li>
+
+	<li>Device: {{ signal.device }} </li>
+
+	<li>Encryption: {{ signal.encryption }} </li>
+
+	<li>Modulation: {{ signal.modulation }} </li>
+
+	<li>Power: {{ signal.power }} </li>
+
+	<li>BSSID: {{ signal.bssid }} </li>
+
+	<li>ESSID: {{ signal.essid }} </li>
+
+	<li>AP Mode: {{ signal.apmode }} </li>
+
+
+    
 
 
 
@@ -25,7 +50,7 @@ Now we add a form to edit the cadet's properties.
 <select name="company_id">
 
     {% for company in companies %}
-
+	
     
 
     <option value="{{company.id}}" 
