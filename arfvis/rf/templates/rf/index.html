@@ -1,0 +1,57 @@
+{% extends 'rf/base_generic.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<p>Welcome, {{ user.get_username }}.  
+
+<a href="{% url 'logout' %}">Log Out</a>
+
+{% else %}
+
+<a href="{% url 'login' %}">Log In</a>
+
+{% endif %}
+
+<p>
+
+<h2>Signal List</h2>
+
+
+
+{% if signal_list %} <!-- check if list is full or empty -->
+
+<ul>
+
+
+
+  {% for signal in signal_list %}
+
+      <li><a href="./{{signal.sensor}}">{{signal.bssid}}</a> {{signal.essid}}</li>
+
+  {% endfor %}
+
+
+
+</ul>
+
+{% else %}
+
+<p>No signals in database</p>
+
+{% endif %}
+
+
+
+{% if user.is_authenticated and perms.user.add_signal %}
+
+<a href="addsensor">Add signal to database</a>
+
+{% endif %}
+
+</p>
+
+
+
+{% endblock %}

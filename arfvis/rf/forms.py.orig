@@ -1,0 +1,22 @@
+from django import forms
+<<<<<<< HEAD
+from .models import Sensor, Signal
+
+class CadetForm(forms.ModelForm):
+    class Meta:
+        model = Sensor
+        fields = '__all__'
+=======
+from .models import Sensor
+>>>>>>> e4d5a92603d4f2020e8504ee6335c4de5ea3fb1f
+
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()
+
+class SensorForm(forms.ModelForm):
+     """Sensor Upload form"""
+     class Meta:
+          model = Sensor
+          fields = '__all__'
+	
