@@ -1,6 +1,6 @@
-{% if user.is_authenticated and perms.rf.upload_pic %}
 
-<form action="upload_pic" method="post">
+
+<form action="upload_pic" enctype="multipart/form-data" method="post">
 
     {% csrf_token %}
 
@@ -10,10 +10,3 @@
 
 </form>
 
-{% else %}
-
-Sorry, you do not have access to upload pictures
-
-
-
-{% endif %}

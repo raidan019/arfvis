@@ -24,9 +24,13 @@ class Sensor(models.Model):
     encryption = models.ForeignKey(Encryption, on_delete=models.CASCADE, default=1)
     modulation = models.ForeignKey(Modulation, on_delete=models.CASCADE, default=1)
 
+class ImageModel(models.Model):
+    model_pic = models.ImageField(upload_to = 'rf/static/pic_folder/', default = 'no-img.jpg')
+
 class Device(models.Model):
     device_name = models.CharField(max_length=100)
-    pictureFileName = models.CharField(max_length=100)
+    #pictureFileName = models.CharField(max_length=100)
+    image = models.ForeignKey(ImageModel, on_delete=models.SET_DEFAULT, default = 1)
     three_dimensional_Object = models.CharField(max_length=100)
     default_username = models.CharField(max_length=100)
     default_password = models.CharField(max_length=100)
@@ -48,6 +52,5 @@ class Signal(models.Model):
     apmode = models.CharField(max_length=100)
     date_time = models.DateTimeField(default=datetime.now, blank=True) 
 
-class ImageModel(models.Model):
-    model_pic = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')
+
 

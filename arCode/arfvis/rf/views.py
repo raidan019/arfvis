@@ -3,9 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import Signal
-from .models import Sensor
-from django.http import HttpResponseRedirect
+from .models import Signal, Device
+from .models import Sensor, ImageModel
+from django.http import HttpResponseRedirect,HttpResponseForbidden
 from .forms import ImageUploadForm, SensorForm
 from django.template import loader
 #from somewhere import handle_uploaded_file
@@ -41,7 +41,8 @@ def index(request):
     else:
         response= "ARFVIS Main"
     signal_list = list(Signal.objects.order_by('signal_strength')[:5])
-    context = {'Signal': signal_list} #fill a context with the signal list
+    devices = Device.objects.all()
+    context = {'Signal': signal_list, 'devices' : devices} #fill a context with the signal list
     template = loader.get_template('rf/index.html') #Get the template we created    
 
     #make a template directory (lists top signals[limit approx. 20])
@@ -52,11 +53,18 @@ def upload_pic(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            m = ExampleModel.objects.get(pk=course_id)
+            m = ImageModel()
             m.model_pic = form.cleaned_data['image']
             m.save()
             return HttpResponse('image upload success')
-    return HttpResponseForbidden('allowed only via POST')
+        else:
+            return HttpResponse('oops the form did not work')
+    else:
+        return HttpResponseForbidden('allowed only via POST')
+
+def upload(request):
+	form = ImageUploadForm()
+	return render(request, 'rf/upload_pic.html', {'form': form})	
 
 def hololens(request):
     signal_list = list(Signal.objects.order_by('signal_strength'))

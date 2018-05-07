@@ -1,4 +1,5 @@
 {% extends 'rf/base_generic.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -42,6 +43,11 @@
 
 {% endif %}
 
+
+{% for device in devices %}
+  Device: {{ device.device_name }}
+  image = <img src='{% static device.image.model_pic.url %}'>
+{% endfor %}
 
 
 {% if user.is_authenticated and perms.user.add_signal %}
