@@ -3,6 +3,8 @@
 
 
 <ul>
+#add signal ID
+	<li>SignalID: {{ signal.azimuth }} </li>
 
     <li>Azimuth: {{ signal.azimuth }} </li>
 
@@ -35,43 +37,8 @@
 
 
 
-<br />
-
-Now we add a form to edit the signal's properties.
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url ''  %}" method="post">
-
-{% csrf_token %} 
-
-<input type="text" name="" value="{{cadet.xnumber}}" />
-
-<select name="company_id">
-
-    {% for company in companies %}
-	
-    
-
-    <option value="{{company.id}}" 
-
-    {% if cadet.company.id == company.id %} 
-
-     selected
-
-    {% endif %}
 
 
-
-    >{{company}}</option>
-
-    {% endfor %}
-
-</select>
-
-<input type="submit" value="Update cadet" />
-
-</form>
 
 </ul>
 
