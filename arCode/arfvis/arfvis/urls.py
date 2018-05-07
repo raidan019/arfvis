@@ -22,10 +22,7 @@ from django.urls import path
 
 urlpatterns = [
     #url(r'^rf/', include('rf.urls')),
-    #url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'',include('rf.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    #path('', views.index, name = 'index'),
-    #path('hololens', views.hololens, name = 'hololens'),
-    #path('upload_pic', views.upload_pic, name = 'upload_pic'),
 ]
