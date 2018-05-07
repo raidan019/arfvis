@@ -62,7 +62,7 @@ def hololens(request):
     signal_list = list(Signal.objects.order_by('signal_strength'))
     context = {'Signal': signal_list} #fill a context with the signal list
     template = loader.get_template('rf/hololens.html') #Get the
-<<<<<<< HEAD
+
 
 def addsensor(request):
     if request.method == 'POST':
@@ -85,7 +85,7 @@ def detail(request, signal_id):
         raise Http404("Signal does not exist")
     return render(request, 'rf/detail.html', context)  
 
-=======
+
 
 def addsensor(request):
     if request.method == 'POST':
@@ -108,7 +108,6 @@ def detail(request, signal_id):
         raise Http404("Signal does not exist")
     return render(request, 'rf/detail.html', context)  
 
->>>>>>> 0168b3030e7111742c985a3d8f3572e0206ac0b9
 
     """def detail(request, cadet_id):
     try:
