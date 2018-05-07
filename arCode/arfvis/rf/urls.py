@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.conf.urls import url
-from django.urls import include, path
+from django.urls import path
 
 from . import views
 '''
@@ -14,5 +14,5 @@ urlpatterns = [
      path('upload_pic', views.upload_pic, name = 'upload_pic'),
      path('<int:signal_id>/', views.detail, name = 'detail'),
      path('add_sensor', views.addsensor, name = 'add_sensor'),
-
 ]
+

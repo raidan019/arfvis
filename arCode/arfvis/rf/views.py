@@ -6,7 +6,7 @@ import json
 from .models import Signal
 from .models import Sensor
 from django.http import HttpResponseRedirect
-from .forms import ImageUploadForm
+from .forms import ImageUploadForm, SensorForm
 from django.template import loader
 #from somewhere import handle_uploaded_file
 # Create your views here.
@@ -62,30 +62,6 @@ def hololens(request):
     signal_list = list(Signal.objects.order_by('signal_strength'))
     context = {'Signal': signal_list} #fill a context with the signal list
     template = loader.get_template('rf/hololens.html') #Get the
-
-
-def addsensor(request):
-    if request.method == 'POST':
-        form = SensorForm(request.POST)
-        if form.is_valid():
-            #Add the cadet to the database
-            newSensor = form.save()
-            #Go back to cadet list
-            return HttpResponseRedirect('/rf')
-    else:
-        form = SensorForm()
-    return render(request, 'rf/add_sensor.html', {'form': form})
-
-def detail(request, signal_id):
-    try: 
-        signal = Signal.objects.get(pk = signal_id)
-        sensor = sensor.sensor
-        context = {'signal': signal, 'sensor' : sensor}
-    except Signal.DoesNotExist:
-        raise Http404("Signal does not exist")
-    return render(request, 'rf/detail.html', context)  
-
-
 
 def addsensor(request):
     if request.method == 'POST':
