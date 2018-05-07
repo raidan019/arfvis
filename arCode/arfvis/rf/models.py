@@ -5,20 +5,24 @@ from datetime import datetime
 
 class Modulation(models.Model):
     modulation_name = models.CharField(max_length=100)
+    def __str__(self):
+        return (self.modulation_name)
 
 class Encryption(models.Model):
     encryption_name = models.CharField(max_length=100)
     key_size = models.IntegerField(default = 0)
+    def __str__(self):
+        return (self.encryption_name)
 
 class Sensor(models.Model):
-    antenna_type = models.IntegerField(default=0)
+    antenna_type = models.CharField(max_length = 100)
     antenna_direction = models.IntegerField(default=0)
     latitude = models.FloatField(default=0.0)
     longitude = models.FloatField(default=0.0)
     elevation = models.IntegerField(default=0)
-    ssid = models.IntegerField(default=0)
+    ssid = models.CharField(max_length = 100)
     encryption = models.ForeignKey(Encryption, on_delete=models.CASCADE, default=1)
-    modulation = models.IntegerField(default=0)
+    modulation = models.ForeignKey(Modulation, on_delete=models.CASCADE, default=1)
 
 class Device(models.Model):
     device_name = models.CharField(max_length=100)

@@ -70,7 +70,7 @@ def addsensor(request):
             #Add the cadet to the database
             newSensor = form.save()
             #Go back to cadet list
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/rf')
     else:
         form = SensorForm()
     return render(request, 'rf/add_sensor.html', {'form': form})
