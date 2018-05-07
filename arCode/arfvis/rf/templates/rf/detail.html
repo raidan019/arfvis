@@ -37,15 +37,15 @@
 
 <br />
 
-Now we add a form to edit the cadet's properties.
+Now we add a form to edit the signal's properties.
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'users:update' cadet.id %}" method="post">
+<form action="{% url ''  %}" method="post">
 
 {% csrf_token %} 
 
-<input type="text" name="xnumber" value="{{cadet.xnumber}}" />
+<input type="text" name="" value="{{cadet.xnumber}}" />
 
 <select name="company_id">
 
