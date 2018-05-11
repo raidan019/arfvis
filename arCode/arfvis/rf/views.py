@@ -67,9 +67,10 @@ def upload(request):
 	return render(request, 'rf/upload_pic.html', {'form': form})	
 
 def hololens(request):
-    signal_list = list(Signal.objects.order_by('signal_strength'))
-    context = {'Signal': signal_list} #fill a context with the signal list
+    signal_list = list(Signal.objects.order_by('signal_strength'))[:10]
+    context = {'signal_list': signal_list} #fill a context with the signal list
     template = loader.get_template('rf/hololens.html') #Get the
+    return render(request, 'rf/hololens.html', context)
 
 def addsensor(request):
     if request.method == 'POST':
@@ -83,10 +84,10 @@ def addsensor(request):
         form = SensorForm()
     return render(request, 'rf/add_sensor.html', {'form': form})
 
-def detail(request, signal_id):
+def detail(request):
     try: 
-        signal = Signal.objects.get(pk = signal_id)
-        sensor = sensor.sensor
+        signal = Signal.objects.all
+        sensor = Signal.sensor
         context = {'signal': signal, 'sensor' : sensor}
     except Signal.DoesNotExist:
         raise Http404("Signal does not exist")
